@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+               sh 'mvn package'
+               sh "chmod +x mvnw"
+               junit 'target/surefire-reports/*.xml'
+               step([
+                     $class: 'JacocoPublisher',
+                     execPattern: 'target/*.exec',
+                     classPattern: 'target/classes',
+                     sourcePattern: 'src/main/java',
+                     exclusionPattern: 'src/test*'
+               ])
+            }
+
+        }
+        stage('deploy') {
+            steps {
+                sh 'chmod +x ./jenkins/scripts/start_back.sh'
+                sh './jenkins/scripts/start_back.sh'
+            }
+        }
+    }
+}
+

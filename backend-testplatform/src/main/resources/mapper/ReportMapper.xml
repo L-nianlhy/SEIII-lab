@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.collect.dao.report.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.example.collect.po.report.Report">
+    <id column="report_id" jdbcType="INTEGER" property="reportId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="cooperation_id" jdbcType="INTEGER" property="cooperationId"/>
+    <result column="bug_photo" jdbcType="VARCHAR" property="bugPhoto" />
+    <result column="bug_intro" jdbcType="VARCHAR" property="bugIntro" />
+    <result column="bug_step" jdbcType="VARCHAR" property="bugStep" />
+    <result column="device_information" jdbcType="VARCHAR" property="deviceInformation" />
+    <result column="time_stamp" jdbcType="VARCHAR" property="timeStamp"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    report_id, uid, task_id, cooperation_id, bug_photo, bug_intro, bug_step, device_information, time_stamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.collect.po.report.Report">
+    <selectKey keyProperty="reportId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into report (uid, task_id, cooperation_id, bug_photo,
+      bug_intro, bug_step, device_information, time_stamp
+      )
+    values (#{uid,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{cooperationId,jdbcType=INTEGER}, #{bugPhoto,jdbcType=VARCHAR},
+    #{bugIntro,jdbcType=VARCHAR}, #{bugStep,jdbcType=VARCHAR}, #{deviceInformation,jdbcType=VARCHAR}, #{timeStamp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.collect.po.report.Report">
+    <selectKey keyProperty="reportId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="cooperationId != null">
+        cooperation_id,
+      </if>
+      <if test="bugPhoto != null">
+        bug_photo,
+      </if>
+      <if test="bugIntro != null">
+        bug_intro,
+      </if>
+      <if test="bugStep != null">
+        bug_step,
+      </if>
+      <if test="deviceInformation != null">
+        device_information,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationId != null">
+        #{cooperationId,jdbcType=INTEGER},
+      </if>
+      <if test="bugPhoto != null">
+        #{bugPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="bugIntro != null">
+        #{bugIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bugStep != null">
+        #{bugStep,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceInformation != null">
+        #{deviceInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.collect.po.report.Report">
+    update report
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationId != null">
+        #{cooperationId,jdbcType=INTEGER},
+      </if>
+      <if test="bugPhoto != null">
+        bug_photo = #{bugPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="bugIntro != null">
+        bug_intro = #{bugIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bugStep != null">
+        bug_step = #{bugStep,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceInformation != null">
+        device_information = #{deviceInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.collect.po.report.Report">
+    update report
+    set uid = #{uid,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      cooperation_id = #{cooperationId,jdbcType=INTEGER},
+      bug_photo = #{bugPhoto,jdbcType=VARCHAR},
+      bug_intro = #{bugIntro,jdbcType=VARCHAR},
+      bug_step = #{bugStep,jdbcType=VARCHAR},
+      device_information = #{deviceInformation,jdbcType=VARCHAR},
+      time_stamp = #{timeStamp,jdbcType=VARCHAR}
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectPhoto" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select bug_photo
+    from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectReport" resultMap="BaseResultMap">
+    select *
+    from report
+    where uid = #{uid} and task_id = #{taskId} and cooperation_id = #{cooperationId}
+  </select>
+
+  <select id="selectReportsByTaskId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from report
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateBugPhoto">
+    update report
+    set bug_photo = #{bugPhoto}
+    where report_id = #{reportId}
+  </update>
+
+  <select id="selectCooperationReports" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from report
+    where cooperation_id = #{reportId}
+  </select>
+
+  <select id="selectNumOfReports" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from report
+    where uid = #{uid} and date_sub(curdate(), interval 7 day) &lt;= time_stamp
+  </select>
+
+  <select id="selectNumOfCoopReports" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from report
+    where uid = #{uid} and cooperation_id != 0 and date_sub(curdate(), interval 7 day) &lt;= time_stamp
+  </select>
+
+  <select id="selectNumOfDupReports" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from report
+    where cooperation_id in (select report_id from report where uid = #{uid})
+  </select>
+
+  <select id="selectNumOfTotalReports" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from report
+    where uid = #{uid}
+  </select>
+
+</mapper>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.collect.dao.task.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.example.collect.po.task.Task">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="task_intro" jdbcType="VARCHAR" property="taskIntro"/>
+    <result column="task_time" jdbcType="VARCHAR" property="taskTime" />
+    <result column="task_type" jdbcType="VARCHAR" property="taskType" />
+    <result column="num_of_worker" jdbcType="INTEGER" property="numOfWorker" />
+    <result column="num_of_need_worker" jdbcType="INTEGER" property="numOfNeedWorker" />
+    <result column="task_difficulty" jdbcType="VARCHAR" property="taskDifficulty"/>
+    <result column="task_device" jdbcType="VARCHAR" property="taskDevice"/>
+    <result column="task_app" jdbcType="VARCHAR" property="taskApp" />
+    <result column="task_doc" jdbcType="VARCHAR" property="taskDoc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, uid, task_name, task_intro, task_time, task_type, num_of_worker, num_of_need_worker,
+    task_difficulty, task_device, task_app, task_doc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.collect.po.task.Task">
+    <selectKey keyProperty="taskId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task (uid, task_name, task_intro, task_time,
+      task_type, num_of_worker, num_of_need_worker,
+      task_difficulty, task_device, task_app, task_doc
+      )
+    values (#{uid,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{taskIntro,jdbcType=VARCHAR},
+      #{taskTime,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, #{numOfWorker,jdbcType=INTEGER},
+      #{numOfNeedWorker,jdbcType=INTEGER}, #{taskDifficulty,jdbcType=VARCHAR},
+      #{taskDevice,jdbcType=VARCHAR}, #{taskApp,jdbcType=VARCHAR}, #{taskDoc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.collect.po.task.Task">
+    <selectKey keyProperty="taskId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="taskIntro != null">
+        task_intro,
+      </if>
+      <if test="taskTime != null">
+        task_time,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="numOfWorker != null">
+        num_of_worker,
+      </if>
+      <if test="numOfNeedWorker != null">
+        num_of_need_worker,
+      </if>
+      <if test="taskDifficulty != null">
+        task_difficulty,
+      </if>
+      <if test="taskDevice != null">
+        taskDevice,
+      </if>
+      <if test="taskApp != null">
+        task_app,
+      </if>
+      <if test="taskDoc != null">
+        task_doc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskIntro != null">
+        #{taskIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTime != null">
+        #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="numOfWorker != null">
+        #{numOfWorker,jdbcType=INTEGER},
+      </if>
+      <if test="numOfNeedWorker != null">
+        #{numOfNeedWorker,jdbcType=INTEGER},
+      </if>
+      <if test="taskDifficulty != null">
+        #{taskDifficulty,jdbcTypr=VARCHAR},
+      </if>
+      <if test="taskDevice != null">
+        #{taskDevice,jdbcTypr=VARCHAR},
+      </if>
+      <if test="taskApp != null">
+        #{taskApp,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDoc != null">
+        #{taskDoc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.collect.po.task.Task">
+    update task
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskIntro != null">
+        task_intro = #{taskIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTime != null">
+        task_time = #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="numOfWorker != null">
+        num_of_worker = #{numOfWorker,jdbcType=INTEGER},
+      </if>
+      <if test="numOfNeedWorker != null">
+        num_of_need_worker = #{numOfNeedWorker,jdbcType=INTEGER},
+      </if>
+      <if test="taskDifficulty != null">
+        #{taskDifficulty,jdbcTypr=VARCHAR},
+      </if>
+      <if test="taskDevice != null">
+        #{taskDevice,jdbcTypr=VARCHAR},
+      </if>
+      <if test="taskApp != null">
+        task_app = #{taskApp,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDoc != null">
+        task_doc = #{taskDoc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.collect.po.task.Task">
+    update task
+    set uid = #{uid,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_intro = #{taskIntro,jdbcType=VARCHAR},
+      task_time = #{taskTime,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      num_of_worker = #{numOfWorker,jdbcType=INTEGER},
+      num_of_need_worker = #{numOfNeedWorker,jdbcType=INTEGER},
+      task_difficulty = #{taskDifficulty,jdbcType=VARCHAR},
+      task_device = #{taskDevice,jdbcType=VARCHAR},
+      task_app = #{taskApp,jdbcType=VARCHAR},
+      task_doc = #{taskDoc,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.collect.po.task.Task">
+    update task
+    set uid = #{uid,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_intro = #{taskIntro,jdbcType=VARCHAR},
+      task_time = #{taskTime,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      num_of_worker = #{numOfWorker,jdbcType=INTEGER},
+      num_of_need_worker = #{numOfNeedWorker,jdbcType=INTEGER},
+      task_difficulty = #{taskDifficulty,jdbcType=VARCHAR},
+      task_device = #{taskDevice,jdbcType=VARCHAR},
+      task_app = #{taskApp,jdbcType=VARCHAR},
+      task_doc = #{taskDoc,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectTaskApp" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select task_app
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTaskDoc" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select task_doc
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectNumOfWorker" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select num_of_worker
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectNumOfNeedWorker" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select num_of_need_worker
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateNumOfWorker">
+    update task
+    set num_of_worker = #{numOfWorker}
+    where task_id = #{taskId}
+  </update>
+
+  <select id="selectTaskTime" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select task_time
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from task
+  </select>
+
+  <select id="selectAllReleasedTasks" resultMap="BaseResultMap">
+    select *
+    from task
+    where uid = #{uid}
+  </select>
+
+  <update id="updateAppByPrimaryKey">
+    update task
+    set task_app = #{taskApp}
+    where task_id = #{taskId}
+  </update>
+
+  <update id="updateDocByPrimaryKey">
+    update task
+    set task_doc = #{taskDoc}
+    where task_id = #{taskId}
+  </update>
+
+  <select id="selectTaskId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from task
+    where task_name = #{taskName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectTasksByAbility" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from task
+    where task_difficulty = #{value} and num_of_worker &lt; num_of_need_worker and curdate() &lt; task_time
+  </select>
+
+  <select id="selectTaskByPreference" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from task
+    where task_type = #{value} and num_of_worker &lt; num_of_need_worker and curdate() &lt; task_time
+  </select>
+
+  <select id="selectTasksByDevice" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from task
+    where task_device = #{value} and num_of_worker &lt; num_of_need_worker and curdate() &lt; task_time
+  </select>
+
+</mapper>

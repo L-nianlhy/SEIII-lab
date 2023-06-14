@@ -1,0 +1,157 @@
+{
+  "main": {
+    "id": "9ffd12118ffb4c21",
+    "type": "split",
+    "children": [
+      {
+        "id": "6759feaa89939e2f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19763fd41f0bcb22",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "需求规格说明书.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "aee04bde70402685",
+    "type": "split",
+    "children": [
+      {
+        "id": "30c5b6940ca1e5ac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b1b6d1ce4c5dd002",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c5364665dc841128",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2f7cb44a7ff8ed34",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "884fbc329ef9b8ca",
+    "type": "split",
+    "children": [
+      {
+        "id": "9abee74bcf5ed4c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b55e718c7ef0fad8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "需求规格说明书.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "cd17f8859dfa1cd8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "需求规格说明书.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b68b4ef6f08ff125",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e1526dfcb3b524c2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "需求规格说明书.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "19763fd41f0bcb22",
+  "lastOpenFiles": [
+    "项目设计文档.md",
+    "计划文档.md",
+    "项目启动文档.md",
+    "需求规格说明书.md",
+    "测试文档.md"
+  ]
+}

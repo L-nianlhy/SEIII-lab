@@ -1,0 +1,37 @@
+{
+  "id": "3189148",
+  "name": "vueproject",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "144706",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "866488",
+      "name": "表单",
+      "font_class": "biaodan",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "1727269",
+      "name": "06商品",
+      "font_class": "shangpin",
+      "unicode": "e888",
+      "unicode_decimal": 59528
+    },
+    {
+      "icon_id": "15388515",
+      "name": "管理员",
+      "font_class": "guanliyuan",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    }
+  ]
+}

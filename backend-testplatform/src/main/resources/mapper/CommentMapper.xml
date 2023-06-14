@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.collect.dao.comment.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.example.collect.po.comment.Comment" >
+    <id column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR"/>
+    <result column="report_id" property="reportId" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="time_stamp" property="timeStamp" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    comment_id, uid, uname, report_id, score, content, time_stamp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.collect.po.comment.Comment" >
+    <selectKey resultType="java.lang.Integer" keyProperty="commentId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment (uid, uname, report_id, score,
+      content, time_stamp)
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{reportId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER},
+      #{content,jdbcType=VARCHAR}, #{timeStamp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.collect.po.comment.Comment" >
+    <selectKey resultType="java.lang.Integer" keyProperty="commentId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="reportId != null" >
+        report_id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="timeStamp != null" >
+        time_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="reportId != null" >
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null" >
+        #{timeStamp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.collect.po.comment.Comment" >
+    update comment
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="reportId != null" >
+        report_id = #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null" >
+        time_stamp = #{timeStamp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.collect.po.comment.Comment" >
+    update comment
+    set uid = #{uid,jdbcType=INTEGER},
+      uname = #{uname,jdbcType=VARCHAR},
+      report_id = #{reportId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      time_stamp = #{timeStamp,jdbcType=VARCHAR}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCommentsByReportId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from comment
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectNumOfComments" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from comment
+    where uid = #{uid} and date_sub(curdate(), interval 7 day) &lt;= time_stamp
+  </select>
+
+  <select id="selectAverageScore" parameterType="java.lang.Integer" resultType="java.lang.Double">
+    select avg(score)
+    from comment
+    where report_id in (select report_id from report where uid = #{uid})
+  </select>
+</mapper>
